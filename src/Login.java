@@ -3,6 +3,7 @@ import java.lang.*;
 public class Login {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
+        extra.loading("Program starting");
         ArrayList<Local> localList = new ArrayList<>();
         localList.add(extra.defaultAccount(1));
         localList.add(extra.defaultAccount(2));
@@ -10,11 +11,18 @@ public class Login {
         SecondMenu m2 = new SecondMenu();
         int profile = 0;
         x:while (true) {
-
             extra.clearScreen();
             System.out.println("1.Sign In\n2.Sign Up\n3.Save & Exit");
-                int option = sc.nextInt();
-                sc.nextLine();
+            int option = 0;
+            while(true) {
+                try {
+                    option = sc.nextInt();
+                    sc.nextLine();
+                    break ;
+                } catch (Exception e) {
+
+                }
+            }
             if (option == 1) {
                 do {
                     System.out.println("EMAIL: ");

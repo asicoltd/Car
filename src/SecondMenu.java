@@ -109,6 +109,7 @@ public class SecondMenu {
                             " " + localList.get(1).getLastName());
                     localList.get(driverNo).setRating(sc.nextDouble());
                     sc.nextLine();
+                    System.out.println("Thanks for rating");
                     return ride;
                 }
             }
@@ -147,7 +148,7 @@ public class SecondMenu {
                         " "+ localList.get(0).getLastName());
                 localList.get(0).setRating(sc.nextDouble());
                 sc.nextLine();
-
+                System.out.println("Thanks for rating");
                 localList.get(riderNo).addRide(ride);
             }
         }

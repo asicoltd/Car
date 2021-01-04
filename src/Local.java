@@ -62,7 +62,6 @@ abstract class Local implements Serializable {
         while (true) {
             if (rating <= 5 && rating >= 0) {
                 this.rating = (rating + this.rating) / 2.0;
-                System.out.println("Thanks for rating");
                 break;
             }
             else{
