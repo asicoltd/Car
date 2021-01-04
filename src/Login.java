@@ -17,7 +17,7 @@ public class Login {
                 sc.nextLine();
             if (option == 1) {
                 do {
-                    System.out.println("Email: ");
+                    System.out.println("EMAIL: ");
                     String Email = sc.nextLine();
                     System.out.println("Password: ");
                     String Password = sc.nextLine();
