@@ -13,16 +13,8 @@ public class Login {
         x:while (true) {
             extra.clearScreen();
             System.out.println("1.Sign In\n2.Sign Up\n3.Save & Exit");
-            int option = 0;
-            while(true) {
-                try {
-                    option = sc.nextInt();
+            int option = sc.nextInt();
                     sc.nextLine();
-                    break ;
-                } catch (Exception e) {
-
-                }
-            }
             if (option == 1) {
                 do {
                     System.out.println("EMAIL: ");
