@@ -3,15 +3,17 @@ import java.lang.*;
 public class Login {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        extra.loading("Program starting");
-        ArrayList<Local> localList = new ArrayList<>();
-        localList.add(extra.defaultAccount(1));
-        localList.add(extra.defaultAccount(2));
+        feature f = new extra();
+        f.loading("Program starting");
+        Admin a = new Admin();
+        ArrayList<Local> localList = a.saveLoad();
+        assert localList != null;
+
         FirstMenu m1 = new FirstMenu();
         SecondMenu m2 = new SecondMenu();
         int profile = 0;
         x:while (true) {
-            extra.clearScreen();
+            f.clearScreen();
             System.out.println("1.Sign In\n2.Sign Up\n3.Save & Exit");
             int option = sc.nextInt();
                     sc.nextLine();
@@ -26,9 +28,11 @@ public class Login {
                 } while (profile == -1);
             } else if (option == 2) {
                     localList.add(m1.signUp());
+                System.out.println("Data has been saved");
+                f.WriteObjectToFile(localList);
                     continue;
             } else if (option == 3) {
-                //Save
+                f.WriteObjectToFile(localList);
                 break;
             }
             while (true){
@@ -79,7 +83,7 @@ public class Login {
                     } else if (option2 == 3) {
                         m2.previousRides(profile,localList);
                     } else if (option2 == 4) {
-                        break;
+                        break ;
                     }
                 }
             }

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 public class FirstMenu {
     public Scanner sc = new Scanner(System.in);
@@ -10,8 +11,7 @@ public class FirstMenu {
                 }
                 if ( i == (localList.size()-1) ) {
                     System.out.println("Wrong Password\nPress 0 to return login menu");
-                    int option = sc.nextInt();
-                    sc.nextLine();
+                    int option = getInt();
                     if(option == 0){
                         return -2;
                     }
@@ -20,8 +20,7 @@ public class FirstMenu {
             }
         }
         System.out.println("No Account found in this email\nPress 0 to return login menu");
-        int option = sc.nextInt();
-        sc.nextLine();
+        int option = getInt();
         if(option == 0){
             return -2;
         }
@@ -31,8 +30,7 @@ public class FirstMenu {
     public Local signUp() {
         while (true) {
             System.out.println("Sign Up as:\n1.Rider\n2.Driver\n3.Return to login menu");
-            int option = sc.nextInt();
-            sc.nextLine();
+            int option = getInt();
             if (option == 1) {
                 Local rider = new Rider();
                 System.out.println("First Name: ");
@@ -44,8 +42,7 @@ public class FirstMenu {
                 System.out.println("Password: ");
                 rider.setPassWord(sc.nextLine());
                 System.out.println("Phone no: ");
-                rider.setPhoneNo(sc.nextInt());
-                sc.nextLine();
+                rider.setPhoneNo(getInt());
                 return rider;
             } else if (option == 2) {
                 Driver driver = new Driver();
@@ -58,8 +55,7 @@ public class FirstMenu {
                 System.out.println("Password: ");
                 driver.setPassWord(sc.nextLine());
                 System.out.println("Phone no: ");
-                driver.setPhoneNo(sc.nextInt());
-                sc.nextLine();
+                driver.setPhoneNo(getInt());
                 System.out.println("Car no: ");
                 driver.setCarNo(sc.nextLine());
                 System.out.println("Driving Licence no: ");
@@ -70,5 +66,15 @@ public class FirstMenu {
             }
         }
         return null;
+    }
+    public int getInt() {
+        while (true) {
+            try {
+                return sc.nextInt();
+            } catch (InputMismatchException e) {
+                sc.next();
+                System.out.print("Please enter an integer value\n");
+            }
+        }
     }
 }

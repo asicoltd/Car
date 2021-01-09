@@ -1,6 +1,7 @@
 import java.util.*;
 public class SecondMenu {
     public Scanner sc = new Scanner(System.in);
+    feature f = new extra();
     //View Profile
      public void viewProfile(int profile, ArrayList<Local> localList){
         System.out.println(localList.get(profile).toString());
@@ -14,20 +15,17 @@ public class SecondMenu {
     public boolean verifyNow(int profile, ArrayList<Local> localList){
          while(true) {
              System.out.println("1.Verify by phone number\n2.Verify by Email\n3.Verify Later");
-             int option = sc.nextInt();
-             sc.nextLine();
+             int option = getInt();
              if (option == 1) {
                  System.out.println("Enter your phone No.");
                  while (true) {
-                     int phn = sc.nextInt();
-                     sc.nextLine();
+                     int phn = getInt();
                      if (phn == (localList.get(profile).getPhoneNo())) {
-                         extra.loading("Verifying");
+                         f.loading("Verifying");
                          return true;
                      } else {
                          System.out.println("Please try with your registered Phone no\n0.Return");
-                         int optionPhn = sc.nextInt();
-                         sc.nextLine();
+                         int optionPhn = getInt();
                          if (optionPhn == 0) break;
                      }
                  }
@@ -36,12 +34,11 @@ public class SecondMenu {
                  while (true) {
                      String mail = sc.nextLine();
                      if (mail.equals(localList.get(profile).getEmail())) {
-                         extra.loading("Verifying");
+                         f.loading("Verifying");
                          return true;
                      } else {
                          System.out.println("Please try with your registered email\n0.Return");
-                         int optionMail = sc.nextInt();
-                         sc.nextLine();
+                         int optionMail = getInt();
                          if (optionMail == 0) break;
                      }
                  }
@@ -68,16 +65,15 @@ public class SecondMenu {
         ride.setPickupPoint(string);
         //MapAPI
         System.out.println("Total distance :"+ride.getTotalDistance()+" Km");
-        extra.loading("Estimating Bill");
+        f.loading("Estimating Bill");
         System.out.println("Estimated Bill : "+ ride.getEstimatedBill()+" tk\nContinue Ride?\n1.Yes\n2.No");
-        int continueOption = sc.nextInt();
-        sc.nextLine();
+        int continueOption = getInt();
         if( continueOption == 2 ){
             return null;
         }
         //searching rider
         int driverNo = -1;
-        extra.loading("Searching driver");
+        f.loading("Searching driver");
         for (int i = 0 ; i < localList.size() ; i++ ) {
             if (localList.get(i) instanceof Driver) {
                 if (((Driver) localList.get(i)).isAvailable()) {
@@ -91,9 +87,9 @@ public class SecondMenu {
             System.out.println("Sorry!!! No Driver found active");
             return null;
         } else {
-            extra.loading("Ride Starting");
+            f.loading("Ride Starting");
             ride.setStartTime();
-            extra.loading("Riding");
+            f.loading("Riding");
             System.out.println("Ride will end approximately "+ride.getEstimatedTime()+" min");
             ride.setEndingTime();
             System.out.println("Reach to your destination at "+ride.getTimeNeeded()+" min needed");
@@ -101,14 +97,12 @@ public class SecondMenu {
             System.out.println("Total time (Min.):" + ride.getTotalTime());
             while (true) {
                 System.out.println("Pay bill "+ ride.getBillNeeded()+"\nTo pay bill press 1");
-                int payOption = sc.nextInt();
-                sc.nextLine();
+                int payOption = getInt();
                 if (payOption == 1) {
                     System.out.println("Bill paid successfully");
                     System.out.println("How many stars for " + localList.get(1).getFirstName() +
                             " " + localList.get(1).getLastName());
-                    localList.get(driverNo).setRating(sc.nextDouble());
-                    sc.nextLine();
+                    localList.get(driverNo).setRating(getDouble());
                     System.out.println("Thanks for rating");
                     return ride;
                 }
@@ -120,23 +114,21 @@ public class SecondMenu {
     public void receiveRide(int riderNo,ArrayList<Local> localList) {
         Rides ride = new Rides();
 
-        extra.loading("Searching pickup request ");
+        f.loading("Searching pickup request ");
         System.out.println("1 pickup request found");
         System.out.println("1.Accept\n2.Cancel");
-        int option = sc.nextInt();
-        sc.nextLine();
+        int option = getInt();
         if (option == 1) {
             System.out.println("Rider Name :" + localList.get(0).getFirstName() + " " + localList.get(0).getLastName());
             System.out.println("Pickup Point : Khilgaon Taltala Market");
             //MapAPI
-            extra.loading("Almost reached to the Rider's pick up point");
+            f.loading("Almost reached to the Rider's pick up point");
             System.out.println("Press 1 for start ride");
-            int startOption = sc.nextInt();
-            sc.nextLine();
+            int startOption = getInt();
             if (startOption == 1) {
-                extra.loading("Ride Starting");
+                f.loading("Ride Starting");
                 ride.setStartTime();
-                extra.loading("Riding");
+                f.loading("Riding");
                 System.out.println("Ride will end approximately 30 min");
                 ride.setEndingTime();
                 System.out.println("Reach to your destination");
@@ -146,8 +138,7 @@ public class SecondMenu {
 
                 System.out.println("How many stars for " + localList.get(0).getFirstName()+
                         " "+ localList.get(0).getLastName());
-                localList.get(0).setRating(sc.nextDouble());
-                sc.nextLine();
+                localList.get(0).setRating(getDouble());
                 System.out.println("Thanks for rating");
                 localList.get(riderNo).addRide(ride);
             }
@@ -162,12 +153,31 @@ public class SecondMenu {
              } else status = "Offline";
              System.out.println("Your current status :" + status);
              System.out.println("press 1 to change status\npress 2 to exit");
-             int option = sc.nextInt();
-             sc.nextLine();
+             int option = getInt();
              if (option == 1) {
                  ((Driver) localList.get(profile)).setAvailable(!((Driver) localList.get(profile)).isAvailable());
              } else if (option == 2)
                  break;
          }
+    }
+    public int getInt() {
+        while (true) {
+            try {
+                return sc.nextInt();
+            } catch (InputMismatchException e) {
+                sc.next();
+                System.out.print("Please enter an integer value\n");
+            }
+        }
+    }
+    public double getDouble() {
+        while (true) {
+            try {
+                return sc.nextDouble();
+            } catch (InputMismatchException e) {
+                sc.next();
+                System.out.print("Please enter an integer value\n");
+            }
+        }
     }
 }
