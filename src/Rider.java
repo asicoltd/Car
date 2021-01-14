@@ -1,11 +1,12 @@
 import java.io.Serializable;
-public class Rider extends Local implements Serializable {
+public class Rider extends Account implements Serializable {
 
 
     @Override
     public String toString() {
         if(getVerification()){
-            return  "Name :"+getFirstName()+" "+getLastName()+"\n"+
+            return  "Account Type: Driver\n" +
+                    "Name :"+getFirstName()+" "+getLastName()+"\n"+
                     "Email :"+getEmail()+"\n"+
                     "Phone No :"+getPhoneNo()+"\n"+
                     "Rating :"+getRating()+"\n"+

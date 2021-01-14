@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-public class Driver extends Local implements Serializable {
+public class Driver extends Account implements Serializable {
     private String carNo;
     private String Licence;
     private boolean Available;
@@ -26,7 +26,8 @@ public class Driver extends Local implements Serializable {
     @Override
     public String toString() {
 
-        return  "Name :"+getFirstName()+" "+getLastName()+"\n"+
+        return  "Account Type: Driver\n" +
+                "Name :"+getFirstName()+" "+getLastName()+"\n"+
                 "Email :"+getEmail()+"\n"+
                 "Phone No :"+getPhoneNo()+"\n"+
                 "Verified :"+getVerification()+"\n"+

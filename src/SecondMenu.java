@@ -3,16 +3,18 @@ public class SecondMenu {
     public Scanner sc = new Scanner(System.in);
     feature f = new extra();
     //View Profile
-     public void viewProfile(int profile, ArrayList<Local> localList){
+     public void viewProfile(int profile, ArrayList<Account> localList){
         System.out.println(localList.get(profile).toString());
+         Generics <Account> iObj = new Generics<>(localList.get(profile));
+         System.out.println(iObj.getObject());
     }
     //Profile Type
-    public int profileType(int profile, ArrayList<Local> localList){
+    public int profileType(int profile, ArrayList<Account> localList){
          if(localList.get(profile) instanceof Rider) return 1;
          else return 2;
     }
     //Verify Now
-    public boolean verifyNow(int profile, ArrayList<Local> localList){
+    public boolean verifyNow(int profile, ArrayList<Account> localList){
          while(true) {
              System.out.println("1.Verify by phone number\n2.Verify by Email\n3.Verify Later");
              int option = Int();
@@ -48,14 +50,14 @@ public class SecondMenu {
          return false;
     }
     //Previous Rides
-    public void previousRides(int profile, ArrayList<Local> localList){
+    public void previousRides(int profile, ArrayList<Account> localList){
          for (int i = 0 ; i < localList.get(profile).previousRides().size(); i++){
              System.out.println(localList.get(profile).previousRides().get(i));
          }
     }
     //For Rider
     //Search Ride
-    public Rides searchRide(ArrayList<Local> localList) {
+    public Rides searchRide(ArrayList<Account> localList) {
         System.out.println("Destination :");
         String string = sc.nextLine();
         Rides ride = new Rides();
@@ -111,7 +113,7 @@ public class SecondMenu {
     }
     //For Driver
     //Ride request
-    public void receiveRide(int riderNo,ArrayList<Local> localList) {
+    public void receiveRide(int riderNo,ArrayList<Account> localList) {
         Rides ride = new Rides();
 
         f.loading("Searching pickup request ");
@@ -145,7 +147,7 @@ public class SecondMenu {
         }
     }
     //Available Status
-    public void Available(int profile, ArrayList<Local> localList){
+    public void Available(int profile, ArrayList<Account> localList){
          while(true) {
              String status;
              if (((Driver) localList.get(profile)).isAvailable()) {

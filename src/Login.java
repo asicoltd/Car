@@ -6,9 +6,8 @@ public class Login {
         FirstMenu m1 = new FirstMenu(); // Load first menu
         SecondMenu m2 = new SecondMenu();// Load second menu
         feature f = new extra();// Load file read/ write methods and some visual effects
-        Accounts accounts = new Accounts();
         f.loading("Program starting");
-        ArrayList<Local> localList = accounts.read(); // Read data from save file
+        ArrayList<Account> localList = f.read(); // Read data from save file
         int profile = 0;
         x:while (true) {
             f.clearScreen();
@@ -20,25 +19,25 @@ public class Login {
                     String Email = sc.nextLine();
                     System.out.println("Password: ");
                     String Password = sc.nextLine();
-                    profile = m1.signIn(Email, Password, localList);
+                    profile = m1.signIn(Email, Password, localList); // Detail in FirstMenu class
                     if( profile == -2 )continue x;
                 } while (profile == -1);
             } else if (option == 2) {
-                    localList.add(m1.signUp());
+                    localList.add(m1.signUp()); // Detail in FirstMenu class
                 System.out.println("Data has been saved");
-                accounts.write(localList);
+                f.write(localList);
                     continue;
             } else if (option == 3) {
-                accounts.write(localList);
+                f.write(localList);
                 break;
             }
             while (true){
-                int profileType = m2.profileType(profile,localList);
+                int profileType = m2.profileType(profile,localList); // Detail in SecondMenu class
                 if( profileType == 1 ) {//Rider == 1
                     System.out.println("1.View Profile\n2.Request a Ride\n3.Previous Rides\n4.Log Out");
                     int option2 = f.Int();
                     if (option2 == 1) {
-                        m2.viewProfile(profile, localList);
+                        m2.viewProfile(profile, localList); // Detail in SecondMenu class
                         if(!localList.get(profile).getVerification()){
                             System.out.println("Press 1 for Verify your Account");
                             int verifyOption = f.Int();
@@ -57,7 +56,6 @@ public class Login {
                 else{//Driver == 2
                     System.out.println("1.View Profile\n2.Availability\n3.Previous Rides\n4.Log Out");
                     int option2 = f.Int();
-
                     if (option2 == 1) {
                         m2.viewProfile(profile, localList);
                         if(!localList.get(profile).getVerification()){

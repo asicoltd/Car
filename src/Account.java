@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-abstract class Local implements Serializable {
+abstract class Account implements Serializable {
 
     private String firstName;
     private String lastName;
