@@ -11,7 +11,7 @@ public class FirstMenu {
                 }
                 if ( i == (localList.size()-1) ) {
                     System.out.println("Wrong Password\nPress 0 to return login menu");
-                    int option = getInt();
+                    int option = Int();
                     if(option == 0){
                         return -2;
                     }
@@ -20,7 +20,7 @@ public class FirstMenu {
             }
         }
         System.out.println("No Account found in this email\nPress 0 to return login menu");
-        int option = getInt();
+        int option = Int();
         if(option == 0){
             return -2;
         }
@@ -30,7 +30,8 @@ public class FirstMenu {
     public Local signUp() {
         while (true) {
             System.out.println("Sign Up as:\n1.Rider\n2.Driver\n3.Return to login menu");
-            int option = getInt();
+            int option = Int();
+            sc.nextLine();
             if (option == 1) {
                 Local rider = new Rider();
                 System.out.println("First Name: ");
@@ -42,7 +43,7 @@ public class FirstMenu {
                 System.out.println("Password: ");
                 rider.setPassWord(sc.nextLine());
                 System.out.println("Phone no: ");
-                rider.setPhoneNo(getInt());
+                rider.setPhoneNo(Int());
                 return rider;
             } else if (option == 2) {
                 Driver driver = new Driver();
@@ -55,7 +56,7 @@ public class FirstMenu {
                 System.out.println("Password: ");
                 driver.setPassWord(sc.nextLine());
                 System.out.println("Phone no: ");
-                driver.setPhoneNo(getInt());
+                driver.setPhoneNo(Int());
                 System.out.println("Car no: ");
                 driver.setCarNo(sc.nextLine());
                 System.out.println("Driving Licence no: ");
@@ -67,7 +68,7 @@ public class FirstMenu {
         }
         return null;
     }
-    public int getInt() {
+    public int Int() {
         while (true) {
             try {
                 return sc.nextInt();

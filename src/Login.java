@@ -3,20 +3,17 @@ import java.lang.*;
 public class Login {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        feature f = new extra();
+        FirstMenu m1 = new FirstMenu(); // Load first menu
+        SecondMenu m2 = new SecondMenu();// Load second menu
+        feature f = new extra();// Load file read/ write methods and some visual effects
         f.loading("Program starting");
-        Admin a = new Admin();
-        ArrayList<Local> localList = a.saveLoad();
+        ArrayList<Local> localList = f.saveLoad(); // Read data from save file
         assert localList != null;
-
-        FirstMenu m1 = new FirstMenu();
-        SecondMenu m2 = new SecondMenu();
         int profile = 0;
         x:while (true) {
             f.clearScreen();
             System.out.println("1.Sign In\n2.Sign Up\n3.Save & Exit");
-            int option = sc.nextInt();
-                    sc.nextLine();
+            int option = f.Int();
             if (option == 1) {
                 do {
                     System.out.println("EMAIL: ");
@@ -29,24 +26,23 @@ public class Login {
             } else if (option == 2) {
                     localList.add(m1.signUp());
                 System.out.println("Data has been saved");
-                f.WriteObjectToFile(localList);
+                f.writeFile(localList);
                     continue;
             } else if (option == 3) {
-                f.WriteObjectToFile(localList);
+                f.writeFile(localList);
                 break;
             }
             while (true){
                 int profileType = m2.profileType(profile,localList);
                 if( profileType == 1 ) {//Rider == 1
                     System.out.println("1.View Profile\n2.Request a Ride\n3.Previous Rides\n4.Log Out");
-                    int option2 = sc.nextInt();
-                    sc.nextLine();
+                    int option2 = f.Int();
                     if (option2 == 1) {
                         m2.viewProfile(profile, localList);
                         if(!localList.get(profile).getVerification()){
                             System.out.println("Press 1 for Verify your Account");
-                            int verifyOption = sc.nextInt();
-                            sc.nextLine();
+                            int verifyOption = f.Int();
+
                             if( verifyOption == 1 )
                             localList.get(profile).setVerification(m2.verifyNow(profile,localList));
                         }
@@ -60,14 +56,13 @@ public class Login {
                 }
                 else{//Driver == 2
                     System.out.println("1.View Profile\n2.Availability\n3.Previous Rides\n4.Log Out");
-                    int option2 = sc.nextInt();
-                    sc.nextLine();
+                    int option2 = f.Int();
+
                     if (option2 == 1) {
                         m2.viewProfile(profile, localList);
                         if(!localList.get(profile).getVerification()){
                             System.out.println("Press 1 for Verify your Account");
-                            int verifyOption = sc.nextInt();
-                            sc.nextLine();
+                            int verifyOption = f.Int();
                             if( verifyOption == 1 )
                                 localList.get(profile).setVerification(m2.verifyNow(profile,localList));
                         }
@@ -88,6 +83,7 @@ public class Login {
                 }
             }
         }
+
     }
 
 }

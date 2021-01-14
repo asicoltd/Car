@@ -15,17 +15,17 @@ public class SecondMenu {
     public boolean verifyNow(int profile, ArrayList<Local> localList){
          while(true) {
              System.out.println("1.Verify by phone number\n2.Verify by Email\n3.Verify Later");
-             int option = getInt();
+             int option = Int();
              if (option == 1) {
                  System.out.println("Enter your phone No.");
                  while (true) {
-                     int phn = getInt();
+                     int phn = Int();
                      if (phn == (localList.get(profile).getPhoneNo())) {
                          f.loading("Verifying");
                          return true;
                      } else {
                          System.out.println("Please try with your registered Phone no\n0.Return");
-                         int optionPhn = getInt();
+                         int optionPhn = Int();
                          if (optionPhn == 0) break;
                      }
                  }
@@ -38,7 +38,7 @@ public class SecondMenu {
                          return true;
                      } else {
                          System.out.println("Please try with your registered email\n0.Return");
-                         int optionMail = getInt();
+                         int optionMail = Int();
                          if (optionMail == 0) break;
                      }
                  }
@@ -67,7 +67,7 @@ public class SecondMenu {
         System.out.println("Total distance :"+ride.getTotalDistance()+" Km");
         f.loading("Estimating Bill");
         System.out.println("Estimated Bill : "+ ride.getEstimatedBill()+" tk\nContinue Ride?\n1.Yes\n2.No");
-        int continueOption = getInt();
+        int continueOption = Int();
         if( continueOption == 2 ){
             return null;
         }
@@ -97,12 +97,12 @@ public class SecondMenu {
             System.out.println("Total time (Min.):" + ride.getTotalTime());
             while (true) {
                 System.out.println("Pay bill "+ ride.getBillNeeded()+"\nTo pay bill press 1");
-                int payOption = getInt();
+                int payOption = Int();
                 if (payOption == 1) {
                     System.out.println("Bill paid successfully");
                     System.out.println("How many stars for " + localList.get(1).getFirstName() +
                             " " + localList.get(1).getLastName());
-                    localList.get(driverNo).setRating(getDouble());
+                    localList.get(driverNo).setRating(Double());
                     System.out.println("Thanks for rating");
                     return ride;
                 }
@@ -117,14 +117,14 @@ public class SecondMenu {
         f.loading("Searching pickup request ");
         System.out.println("1 pickup request found");
         System.out.println("1.Accept\n2.Cancel");
-        int option = getInt();
+        int option = Int();
         if (option == 1) {
             System.out.println("Rider Name :" + localList.get(0).getFirstName() + " " + localList.get(0).getLastName());
             System.out.println("Pickup Point : Khilgaon Taltala Market");
             //MapAPI
             f.loading("Almost reached to the Rider's pick up point");
             System.out.println("Press 1 for start ride");
-            int startOption = getInt();
+            int startOption = Int();
             if (startOption == 1) {
                 f.loading("Ride Starting");
                 ride.setStartTime();
@@ -138,7 +138,7 @@ public class SecondMenu {
 
                 System.out.println("How many stars for " + localList.get(0).getFirstName()+
                         " "+ localList.get(0).getLastName());
-                localList.get(0).setRating(getDouble());
+                localList.get(0).setRating(Double());
                 System.out.println("Thanks for rating");
                 localList.get(riderNo).addRide(ride);
             }
@@ -153,14 +153,14 @@ public class SecondMenu {
              } else status = "Offline";
              System.out.println("Your current status :" + status);
              System.out.println("press 1 to change status\npress 2 to exit");
-             int option = getInt();
+             int option = Int();
              if (option == 1) {
                  ((Driver) localList.get(profile)).setAvailable(!((Driver) localList.get(profile)).isAvailable());
              } else if (option == 2)
                  break;
          }
     }
-    public int getInt() {
+    public int Int() {
         while (true) {
             try {
                 return sc.nextInt();
@@ -170,7 +170,7 @@ public class SecondMenu {
             }
         }
     }
-    public double getDouble() {
+    public double Double() {
         while (true) {
             try {
                 return sc.nextDouble();
