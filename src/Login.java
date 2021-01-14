@@ -6,9 +6,9 @@ public class Login {
         FirstMenu m1 = new FirstMenu(); // Load first menu
         SecondMenu m2 = new SecondMenu();// Load second menu
         feature f = new extra();// Load file read/ write methods and some visual effects
+        Accounts accounts = new Accounts();
         f.loading("Program starting");
-        ArrayList<Local> localList = f.saveLoad(); // Read data from save file
-        assert localList != null;
+        ArrayList<Local> localList = accounts.read(); // Read data from save file
         int profile = 0;
         x:while (true) {
             f.clearScreen();
@@ -26,10 +26,10 @@ public class Login {
             } else if (option == 2) {
                     localList.add(m1.signUp());
                 System.out.println("Data has been saved");
-                f.writeFile(localList);
+                accounts.write(localList);
                     continue;
             } else if (option == 3) {
-                f.writeFile(localList);
+                accounts.write(localList);
                 break;
             }
             while (true){
