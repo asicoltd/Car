@@ -7,4 +7,5 @@ public interface feature {
     int Int();
     ArrayList<Account> read();
     void write(ArrayList<Account> cars);
+    Account defaultAccount(int i);
 }

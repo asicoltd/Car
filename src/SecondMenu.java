@@ -4,7 +4,6 @@ public class SecondMenu {
     feature f = new extra();
     //View Profile
      public void viewProfile(int profile, ArrayList<Account> localList){
-        System.out.println(localList.get(profile).toString());
          Generics <Account> iObj = new Generics<>(localList.get(profile));
          System.out.println(iObj.getObject());
     }
@@ -17,17 +16,17 @@ public class SecondMenu {
     public boolean verifyNow(int profile, ArrayList<Account> localList){
          while(true) {
              System.out.println("1.Verify by phone number\n2.Verify by Email\n3.Verify Later");
-             int option = Int();
+             int option = f.Int();
              if (option == 1) {
                  System.out.println("Enter your phone No.");
                  while (true) {
-                     int phn = Int();
+                     int phn = f.Int();
                      if (phn == (localList.get(profile).getPhoneNo())) {
                          f.loading("Verifying");
                          return true;
                      } else {
                          System.out.println("Please try with your registered Phone no\n0.Return");
-                         int optionPhn = Int();
+                         int optionPhn = f.Int();
                          if (optionPhn == 0) break;
                      }
                  }
@@ -40,7 +39,7 @@ public class SecondMenu {
                          return true;
                      } else {
                          System.out.println("Please try with your registered email\n0.Return");
-                         int optionMail = Int();
+                         int optionMail = f.Int();
                          if (optionMail == 0) break;
                      }
                  }
@@ -69,7 +68,7 @@ public class SecondMenu {
         System.out.println("Total distance :"+ride.getTotalDistance()+" Km");
         f.loading("Estimating Bill");
         System.out.println("Estimated Bill : "+ ride.getEstimatedBill()+" tk\nContinue Ride?\n1.Yes\n2.No");
-        int continueOption = Int();
+        int continueOption = f.Int();
         if( continueOption == 2 ){
             return null;
         }
@@ -99,7 +98,7 @@ public class SecondMenu {
             System.out.println("Total time (Min.):" + ride.getTotalTime());
             while (true) {
                 System.out.println("Pay bill "+ ride.getBillNeeded()+"\nTo pay bill press 1");
-                int payOption = Int();
+                int payOption = f.Int();
                 if (payOption == 1) {
                     System.out.println("Bill paid successfully");
                     System.out.println("How many stars for " + localList.get(1).getFirstName() +
@@ -119,14 +118,14 @@ public class SecondMenu {
         f.loading("Searching pickup request ");
         System.out.println("1 pickup request found");
         System.out.println("1.Accept\n2.Cancel");
-        int option = Int();
+        int option = f.Int();
         if (option == 1) {
             System.out.println("Rider Name :" + localList.get(0).getFirstName() + " " + localList.get(0).getLastName());
             System.out.println("Pickup Point : Khilgaon Taltala Market");
             //MapAPI
             f.loading("Almost reached to the Rider's pick up point");
             System.out.println("Press 1 for start ride");
-            int startOption = Int();
+            int startOption = f.Int();
             if (startOption == 1) {
                 f.loading("Ride Starting");
                 ride.setStartTime();
@@ -155,22 +154,12 @@ public class SecondMenu {
              } else status = "Offline";
              System.out.println("Your current status :" + status);
              System.out.println("press 1 to change status\npress 2 to exit");
-             int option = Int();
+             int option = f.Int();
              if (option == 1) {
                  ((Driver) localList.get(profile)).setAvailable(!((Driver) localList.get(profile)).isAvailable());
              } else if (option == 2)
                  break;
          }
-    }
-    public int Int() {
-        while (true) {
-            try {
-                return sc.nextInt();
-            } catch (InputMismatchException e) {
-                sc.next();
-                System.out.print("Please enter an integer value\n");
-            }
-        }
     }
     public double Double() {
         while (true) {

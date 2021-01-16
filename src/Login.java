@@ -8,6 +8,9 @@ public class Login {
         feature f = new extra();// Load file read/ write methods and some visual effects
         f.loading("Program starting");
         ArrayList<Account> localList = f.read(); // Read data from save file
+//        ArrayList<Account> localList = new ArrayList<>();
+//        localList.add(f.defaultAccount(1));
+//        localList.add(f.defaultAccount(2));
         int profile = 0;
         x:while (true) {
             f.clearScreen();

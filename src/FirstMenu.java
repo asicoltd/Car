@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class FirstMenu {
     public Scanner sc = new Scanner(System.in);
-    feature f;
+    feature f = new extra();
     public int signIn(String email, String passWord, ArrayList<Account> localList) {
         for ( int i = 0 ; i < localList.size() ; i++ ){
             if( localList.get(i).getEmail().equals(email) ){
@@ -31,7 +31,6 @@ public class FirstMenu {
         while (true) {
             System.out.println("Sign Up as:\n1.Rider\n2.Driver\n3.Return to login menu");
             int option = f.Int();
-            sc.nextLine();
             if (option == 1) {
                 Account rider = new Rider();
                 System.out.println("First Name: ");

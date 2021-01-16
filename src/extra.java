@@ -17,7 +17,7 @@ public class extra implements feature{
         }
     }
     public void loading(String s) {
-        for( int i = 0 ; i < 1 ; i++ ) {
+        for( int i = 0 ; i < 0 ; i++ ) {
             clearScreen();
             System.out.println(s);
             sleepSec(5);
@@ -43,6 +43,7 @@ public class extra implements feature{
                 writeStream.writeObject(cars);
                 writeStream.flush();
                 writeStream.close();
+                System.out.println("data save successfully");
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -62,6 +63,32 @@ public class extra implements feature{
             }
             return cars;
         }
+        public Account defaultAccount(int i) {
+        if (i == 1) {
+            Account r = new Rider();
+            r.setFirstName("Default ");
+            r.setLastName("Rider");
+            r.setEmail("dr@gmail.com");
+            r.setPhoneNo(1550032232);
+            r.setPassWord("Password");
+            r.setVerification(true);
+            r.setRating(5);
+            return r;
+        }
+        Driver r = new Driver();
+        r.setFirstName("Default ");
+        r.setLastName("Driver");
+        r.setEmail("dd@gmail.com");
+        r.setPhoneNo(1828045672);
+        r.setPassWord("Password");
+        r.setVerification(true);
+        r.setRating(5);
+        r.setCarNo("ঢাকা মেট্রো গ ১৯-১৬২১");
+        r.setLicence("NK0001441C00007");
+        Rides rides = new Rides();
+        r.ridesList.add(rides);
+        return r;
+    }
     public int Int() {
         Scanner sc = new Scanner(System.in);
         while (true) {
